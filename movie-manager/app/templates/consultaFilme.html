@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta</title>
+  <!-- Incluindo Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <a class="navbar-brand" href="/">Locadora</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="/">Home</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="consultaFilme.html">Consulta de Filmes</a>
+        </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/admin/">Administração</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Lista de Filmes</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Duração</th>
+              <th scope="col">Sinopse</th>
+              <th scope="col">Site oficial</th>
+              <th scope="col">Data lançamento</th>
+              <th scope="col">Nota avaliação</th>
+              <th scope="col">Gênero</th>
+              <th scope="col">País</th>
+              <th scope="col">Diretor</th>
+            </tr>
+            {% for Filme in consultaFilme %}
+          </thead>
+          <tbody>
+           <td>{{Filme.nome}}</td>
+           <td>{{Filme.duracao}}</td>
+           <td>{{Filme.sinopse}}</td>
+           <td>{{Filme.siteOficial}}</td>
+           <td>{{Filme.dataLancamento}}</td>
+           <td>{{Filme.notaAvaliacao}}</td>
+           <td>{% for genero in Filme.genero.all %}
+            {{ genero.nome }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}</td>
+           <td>{{Filme.pais}}</td>
+           <td>{% for diretor in Filme.diretor.all %}
+            {{ diretor.nome }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}</td>
+          </tbody>
+           {% endfor %} 
+        </table>
+      </div>
+
+      <div class="container mt-5">
+        <h2 class="mb-4">Lista de Continetes</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Nome</th>
+                </tr>
+                {% for Continente in consultaContinente %}
+              </thead>
+              <tbody>
+               <td>{{Continente.nome}}</td>
+              </tbody>
+               {% endfor %} 
+            </table>
+          </div>
+    </div>
+  </div>
+
+  <!-- Incluindo jQuery e Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
